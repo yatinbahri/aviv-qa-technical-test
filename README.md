@@ -2,6 +2,8 @@
 
 A real estate platform built with React, TypeScript, and modern web technologies. This project serves as a demonstration of full-stack development capabilities for test automation practices.
 
+<img src='./images/real-estate-platform.png' alt='Real Estate Platform' />
+
 ## 🚀 Getting Started
 
 ### Prerequisites
