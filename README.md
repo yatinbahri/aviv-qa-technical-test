@@ -14,7 +14,9 @@ A real estate platform built with React, TypeScript, and modern web technologies
 
 1. Clone the repository
 ```bash
-git clone <repository-url>
+git clone https://github.com/Aviv-public/aviv-qa-technical-test.git
+cd aviv-qa-technical-test
+
 ```
 
 2. Install dependencies
@@ -78,8 +80,8 @@ QA Engineers, responsible for ensuring the quality and functionality of the API,
 
 2. **Clone your forked repository:**
     ```bash
-    git clone <repository-url>
-    cd <repository-name>
+    git clone https://github.com/username/aviv-qa-technical-test.git
+    cd aviv-qa-technical-test
     ```
 
 3. **Create a new branch:**
