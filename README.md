@@ -45,7 +45,7 @@ QA Engineers, responsible for ensuring the quality and functionality of the API,
 - Maintain test data separate from test logic
 - Include both positive and negative test scenarios
 
-#### Test Flow Requirements
+#### Test scenarios that need to be implemented
 - Implement test cases for user registration, login, and logout
 - Test user roles and permissions (Admin, Agent, User)
 - Verify user profile management functionality
