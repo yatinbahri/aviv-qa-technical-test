@@ -1,0 +1,54 @@
+name: Run Robot Framework Tests
+
+on:
+  push:
+    branches:
+      - main  # Run tests on push to main branch
+  pull_request:
+    branches:
+      - main  # Run tests on PRs targeting main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set Up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      - name: Install Dependencies
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install --upgrade pip
+          pip install robotframework robotframework-seleniumlibrary robotframework-pabot
+          pip install webdriver-manager  # Ensures correct browser drivers
+
+      - name: Install Browsers & Drivers
+        run: |
+          sudo apt update
+          sudo apt install -y google-chrome-stable firefox
+          geckodriver_version=$(curl -s https://api.github.com/repos/mozilla/geckodriver/releases/latest | jq -r '.tag_name' | sed 's/^v//')
+          wget "https://github.com/mozilla/geckodriver/releases/download/v$geckodriver_version/geckodriver-v$geckodriver_version-linux64.tar.gz" -O geckodriver.tar.gz
+          tar -xzf geckodriver.tar.gz
+          sudo mv geckodriver /usr/local/bin/
+
+      - name: Run Tests in Parallel
+        run: |
+          source venv/bin/activate
+          pabot --processes 2 --argumentfile1 tests/browser_chrome.txt --argumentfile2 tests/browser_firefox.txt tests/
+
+      - name: Upload Robot Framework Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: robot-test-reports
+          path: |
+            log.html
+            report.html
+            output.xml
+          retention-days: 7
