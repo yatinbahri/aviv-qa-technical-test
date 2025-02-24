@@ -1,0 +1,5 @@
+--variable BROWSER:firefox
+--outputdir ./pabot_results
+--log log_firefox.html
+--report report_firefox.html
+--output output_firefox.xml

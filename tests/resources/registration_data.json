@@ -1,0 +1,20 @@
+{
+  "users": [
+    {
+      "name": "Aviv Test Buyer",
+      "email": "buyer.test@test.com",
+      "phone": "017523526352",
+      "role": "user",
+      "password": "Test@123",
+      "expected_text": "My Dashboard"
+    },
+    {
+      "name": "Aviv Test Agent",
+      "email": "agent.test@test.com",
+      "phone": "017523526353",
+      "role": "agent",
+      "password": "Test@123",
+      "expected_text": "Agent Dashboard"
+    }
+  ]
+}

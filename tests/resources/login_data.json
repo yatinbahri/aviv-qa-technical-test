@@ -1,0 +1,23 @@
+{
+  "users": {
+    "user": {
+      "email": "test@example.com",
+      "password": "Test123!"
+    },
+    "agent": {
+      "email": "agent@example.com",
+      "password": "Test123!"
+    },
+    "admin": {
+      "email": "admin@example.com",
+      "password": "Test123!"
+    }
+  },
+  "invalid_credentials": {
+    "email": "wronguser@test.com",
+    "password": "WrongPass!"
+  },
+  "invalid_email": {
+    "email": "invalid.com"
+  }
+}

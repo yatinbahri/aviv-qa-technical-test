@@ -1,0 +1,5 @@
+--variable BROWSER:chrome
+--outputdir ./pabot_results/chrome
+--log log_chrome.html
+--report report_chrome.html
+--output output_chrome.xml
