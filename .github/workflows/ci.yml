@@ -17,7 +17,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Ensure full repo checkout
+          fetch-depth: 0
 
       - name: Set Up Python
         uses: actions/setup-python@v4
@@ -32,25 +32,25 @@ jobs:
           pip install robotframework
           pip install robotframework-seleniumlibrary
           pip install robotframework-pabot
-          pip install webdriver-manager  # Ensures correct browser drivers
+          pip install webdriver-manager
 
       - name: Install Browsers & Drivers
-        run: >
-          sudo apt update &&
-          sudo apt install -y google-chrome-stable firefox &&
-
-          geckodriver_version=$(
+        run: |
+          sudo apt update
+          sudo apt install -y google-chrome-stable firefox
+          GECKO_VERSION=$(
             curl -s \
             https://api.github.com/repos/mozilla/geckodriver/releases/latest |
-            jq -r '.tag_name' | awk '{gsub(/^v/, "", $0); print}' | xargs
-          ) &&
-          wget "https://github.com/mozilla/geckodriver/releases/download/
-          v${geckodriver_version}/geckodriver-v${geckodriver_version}-linux64.tar.gz"
-          -O geckodriver.tar.gz &&
-          tar -xzf geckodriver.tar.gz &&
+            jq -r '.tag_name' | sed 's/^v//' | xargs
+          )
+          wget -q \
+            "https://github.com/mozilla/geckodriver/releases/download/"\
+            "v${GECKO_VERSION}/geckodriver-v${GECKO_VERSION}-linux64.tar.gz" \
+            -O geckodriver.tar.gz
+          tar -xzf geckodriver.tar.gz
           sudo mv geckodriver /usr/local/bin/
 
-      - name: "Debug: List Repository Files"
+      - name: Debug Repository Files
         run: |
           echo "Current Directory:"
           pwd
@@ -60,7 +60,7 @@ jobs:
       - name: Run Tests in Parallel
         run: |
           source venv/bin/activate
-          rm -rf .pabotsuitenames  # Ensure Pabot doesn't use stale cache
+          rm -rf .pabotsuitenames
           pabot --processes 2 tests/test_cases/
 
       - name: Upload Robot Framework Reports
