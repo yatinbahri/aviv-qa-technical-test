@@ -42,7 +42,7 @@ jobs:
           geckodriver_version=$(
             curl -s \
             https://api.github.com/repos/mozilla/geckodriver/releases/latest |
-            jq -r '.tag_name' | sed 's/^[[:space:]]*v//g'
+            jq -r '.tag_name' | awk '{$1=$1};1' | sed 's/^v//'
           ) &&
           wget "https://github.com/mozilla/geckodriver/releases/download/
           v${geckodriver_version}/geckodriver-v${geckodriver_version}-linux64.tar.gz"
